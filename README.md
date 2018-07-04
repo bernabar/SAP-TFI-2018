@@ -15,7 +15,7 @@ Jose Luis Bernabe
 
 Sebastián A. Barreto
 
-# Docentes:
+## Docentes:
 Alejandro Sartorio
 
 Alejandro Decastro
