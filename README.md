@@ -11,9 +11,11 @@
 
 ___
 ## Integrantes:
-Jose Luis Bernabe.
-Sebastián A. Barreto.
+Jose Luis Bernabe
+
+Sebastián A. Barreto
 
 # Docentes:
-Alejandro Sartorio.
-Alejandro Decastro.
+Alejandro Sartorio
+
+Alejandro Decastro
