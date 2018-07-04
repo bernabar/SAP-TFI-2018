@@ -3,11 +3,11 @@
 # Proyecto e-Book 
 
 ## Entregables
-* [Project Charter][x]
-* [Arquitectura][x]
-  * Descripción de arq. Codeigniter.
+* [Project Charter]
+* [Arquitectura]
+  * Descripción de arq. `Codeigniter`.
   * Modelos 2MIL.
-* [Modelo de dominio][x]
+* [Modelo de dominio]
 
 ___
 ## Integrantes:
