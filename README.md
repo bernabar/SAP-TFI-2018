@@ -3,11 +3,11 @@
 # Proyecto e-Book 
 
 ## Entregables
-* [Project Charter]
-* [Arquitectura]
+* [Project Charter] ==> Anexo 1
+* [Arquitectura] ==> Anexo 4
   * Descripción de arq. `Codeigniter`.
   * Modelos 2MIL.
-* [Modelo de dominio]
+* [Modelo de dominio] ==> Anexo 2
 
 ___
 ## Integrantes:
