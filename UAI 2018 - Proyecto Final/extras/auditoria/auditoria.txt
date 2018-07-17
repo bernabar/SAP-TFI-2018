@@ -1,0 +1,120 @@
+CREATE TABLE `ospos_sales_log` (
+  `sale_time_log` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `customer_id_log` int(10) DEFAULT NULL,
+  `employee_id_log` int(10) NOT NULL DEFAULT '0',
+  `comment_log` text NOT NULL,
+  `sale_id_log` int(10) NOT NULL,
+  `payment_type_log` varchar(512) DEFAULT NULL,
+  `id_owner_log` int(10) NOT NULL,
+  `fecha_log` varchar(26) NOT NULL,
+  `user_log` varchar(20) NOT NULL,
+  `tipo_log` varchar(01) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `ospos_sales_items_log` (
+  `sale_id_log` int(10) NOT NULL DEFAULT '0',
+  `item_id_log` int(10) NOT NULL DEFAULT '0',
+  `description_log` varchar(30) DEFAULT NULL,
+  `serialnumber_log` varchar(30) DEFAULT NULL,
+  `line_log` int(3) NOT NULL DEFAULT '0',
+  `quantity_purchased_log` double(15,2) NOT NULL DEFAULT '0.00',
+  `item_cost_price_log` decimal(15,2) NOT NULL,
+  `item_unit_price_log` double(15,2) NOT NULL,
+  `discount_percent_log` int(11) NOT NULL DEFAULT '0',
+  `id_owner_log` int(10) NOT NULL,
+  `fecha_log` varchar(26) NOT NULL,
+  `user_log` varchar(20) NOT NULL,
+  `tipo_log` varchar(01) NOT NULL  
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `ospos_sales_items_taxes_log` (
+  `sale_id_log` int(10) NOT NULL,
+  `item_id_log` int(10) NOT NULL,
+  `line_log` int(3) NOT NULL DEFAULT '0',
+  `name_log` varchar(255) NOT NULL,
+  `percent_log` double(15,3) NOT NULL,
+  `id_owner_log` int(10) NOT NULL,
+  `fecha_log` varchar(26) NOT NULL,
+  `user_log` varchar(20) NOT NULL,
+  `tipo_log` varchar(01) NOT NULL  
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `ospos_sales_payments_log` (
+  `sale_id` int(10) NOT NULL,
+  `payment_type` varchar(40) NOT NULL,
+  `payment_amount` decimal(15,2) NOT NULL,
+  `id_owner` int(10) NOT NULL,
+  `fecha_log` varchar(26) NOT NULL,
+  `user_log` varchar(20) NOT NULL,
+  `tipo_log` varchar(01) NOT NULL   
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+1)
+INSERT (AFTER)
+
+INSERT INTO ospos_sales_log (sale_time_log, customer_id_log, employee_id_log, comment_log, sale_id_log, payment_type_log, id_owner_log, fecha_log, user_log, tipo_log)    
+   VALUES (NEW.sale_time, NEW.customer_id, NEW.employee_id, NEW.comment, NEW.sale_id, NEW.payment_type, NEW.id_owner, CURRENT_USER(), NOW(), 'A')
+
+DELETE (BEFORE)
+   
+INSERT INTO ospos_sales_log (sale_time_log, customer_id_log, employee_id_log, comment_log, sale_id_log, payment_type_log, id_owner_log, fecha_log, user_log, tipo_log)    
+   VALUES (OLD.sale_time, OLD.customer_id, OLD.employee_id, OLD.comment, OLD.sale_id, OLD.payment_type, OLD.id_owner, CURRENT_USER(), NOW(), 'B')
+
+MODIFICACION (AFTER)
+ 
+INSERT INTO ospos_sales_log (sale_time_log, customer_id_log, employee_id_log, comment_log, sale_id_log, payment_type_log, id_owner_log, fecha_log, user_log, tipo_log)    
+   VALUES (OLD.sale_time, OLD.customer_id, OLD.employee_id, OLD.comment, OLD.sale_id, OLD.payment_type, OLD.id_owner, CURRENT_USER(), NOW(), 'C')   
+ 
+ 
+2) 
+INSERT (AFTER)
+
+INSERT INTO ospos_sales_items_log (sale_id_log_log, item_id_log, description_log, serialnumber_log, line_log, quantity_purchased_log, item_cost_price_log, item_unit_price_log, discount_percent_log, id_owner_log, fecha_log, user_log, tipo_log )    
+   VALUES (NEW.sale_id, NEW.item_id, NEW.description, NEW.serialnumber, NEW.line, NEW.quantity_purchased, NEW.item_cost_price, NEW.item_unit_price, NEW.discount_percent, NEW.id_owner, CURRENT_USER(), NOW(), 'A') 
+ 
+DELETE (BEFORE)
+   
+INSERT INTO ospos_sales_items_log (sale_id_log_log, item_id_log, description_log, serialnumber_log, line_log, quantity_purchased_log, item_cost_price_log, item_unit_price_log, discount_percent_log, id_owner_log, fecha_log, user_log, tipo_log )    
+   VALUES (OLD.sale_id, OLD.item_id, OLD.description, OLD.serialnumber, OLD.line, OLD.quantity_purchased, OLD.item_cost_price, OLD.item_unit_price, OLD.discount_percent, OLD.id_owner, CURRENT_USER(), NOW(), 'B') 
+ 
+MODIFICACION (AFTER)
+
+INSERT INTO ospos_sales_items_log (sale_id_log_log, item_id_log, description_log, serialnumber_log, line_log, quantity_purchased_log, item_cost_price_log, item_unit_price_log, discount_percent_log, id_owner_log, fecha_log, user_log, tipo_log )    
+   VALUES (OLD.sale_id, OLD.item_id, OLD.description, OLD.serialnumber, OLD.line, OLD.quantity_purchased, OLD.item_cost_price, OLD.item_unit_price, OLD.discount_percent, OLD.id_owner, CURRENT_USER(), NOW(), 'C') 
+
+3)
+
+INSERT (AFTER)
+
+INSERT INTO ospos_sales_items_taxes_log (sale_id_log_log, item_id_log, line_log, name_log, percent_log, id_owner_log, fecha_log, user_log, tipo_log )    
+   VALUES (NEW.sale_id, NEW.item_id, NEW.line, NEW.name, NEW.percent, NEW.id_owner, CURRENT_USER(), NOW(), 'A') 
+
+DELETE (BEFORE)
+
+INSERT INTO ospos_sales_items_taxes_log (sale_id_log_log, item_id_log, line_log, name_log, percent_log, id_owner_log, fecha_log, user_log, tipo_log )    
+   VALUES (OLD.sale_id, OLD.item_id, OLD.line, OLD.name, OLD.percent, OLD.id_owner, CURRENT_USER(), NOW(), 'B') 
+
+MODIFICACION (AFTER)
+
+INSERT INTO ospos_sales_items_taxes_log (sale_id_log_log, item_id_log, line_log, name_log, percent_log, id_owner_log, fecha_log, user_log, tipo_log )    
+   VALUES (OLD.sale_id, OLD.item_id, OLD.line, OLD.name, OLD.percent, OLD.id_owner, CURRENT_USER(), NOW(), 'C') 
+
+
+4)
+
+INSERT (AFTER)
+
+INSERT INTO ospos_sales_payments_log (sale_id_log_log, payment_type_log, payment_amount_log, id_owner_log, fecha_log, user_log, tipo_log )    
+   VALUES (NEW.sale_id, NEW.payment_type, NEW.payment_amount, NEW.id_owner, CURRENT_USER(), NOW(), 'A') 
+
+DELETE (BEFORE)
+
+INSERT INTO ospos_sales_payments_log (sale_id_log_log, payment_type_log, payment_amount_log, id_owner_log, fecha_log, user_log, tipo_log )    
+   VALUES (OLD.sale_id, OLD.payment_type, OLD.payment_amount, OLD.id_owner, CURRENT_USER(), NOW(), 'B')  
+   
+MODIFICACION (AFTER)
+  
+INSERT INTO ospos_sales_payments_log (sale_id_log_log, payment_type_log, payment_amount_log, id_owner_log, fecha_log, user_log, tipo_log )    
+   VALUES (OLD.sale_id, OLD.payment_type, OLD.payment_amount, OLD.id_owner, CURRENT_USER(), NOW(), 'C')        
